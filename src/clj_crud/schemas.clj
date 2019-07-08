@@ -13,3 +13,6 @@
 (s/defschema DeleteUser
   {:id s/Int})
 
+(s/defschema FindUser
+  {:id s/Int})
+

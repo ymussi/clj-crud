@@ -6,7 +6,7 @@
 (defn cadastrar
   [title description]
   (j/insert-multi! db/mysql-db :items
-                 [{:title title :description description}]))
+                   [{:title title :description description}]))
 
 (defn consultar []
   (j/query db/mysql-db '["select * from clojure.items"]))
@@ -21,3 +21,12 @@
   [id]
   (j/delete! db/mysql-db :items
              ["id = ?" id]))
+
+(defn buscar
+  [id]
+  (def consulta "select * from clojure.items where id = ")
+  (j/query db/mysql-db (str consulta id)))
+
+(buscar 2)
+(consultar)
+
