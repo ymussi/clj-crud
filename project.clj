@@ -6,9 +6,12 @@
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [metosin/compojure-api "1.1.11"]
                  [org.clojure/java.jdbc "0.6.0"]
-                 [mysql/mysql-connector-java "5.1.46"]]
-  :ring {:handler clj-crud.api/app}
+                 [mysql/mysql-connector-java "5.1.46"]
+                 [http-kit "2.4.0-alpha4"]
+                 [clj-http "2.2.0"]]
+  :main clj-crud.api
   :uberjar-name "server.jar"
   :target-path "target/%s"
   :profiles {:dev {:dependencies [[javax.servlet/javax.servlet-api "3.1.0"]]
-                   :plugins [[lein-ring "0.12.5"]]}})
+                   :plugins [[lein-ring "0.12.5"]]}
+             :uberjar {:aot :all}})

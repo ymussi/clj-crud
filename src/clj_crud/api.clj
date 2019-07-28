@@ -2,8 +2,12 @@
   (:require [compojure.api.sweet :refer :all]
             [ring.util.http-response :refer :all]
             [schema.core :as s]
+            [ring.util.http-response :refer :all]
+            [org.httpkit.server :as httpkit]
             [clj-crud.cad :as crud]
+            [clj-crud.compras.cad :as gerenciador]
             [clj-crud.schemas :refer :all]
+            [clj-crud.compras.schemas :refer :all]
            ))
 
 (def app
@@ -41,8 +45,20 @@
             :summary "Deleta um usuario"
             :body [user DeleteUser]
             (ok (crud/deletar (:id user))))
-      )))
+      )
 
+    (context "/gerenciador" []
+      :tags ["gerenciador"]
 
+      (POST "/cadastrar" []
+            :summary "Cadstrar Contas"
+            :body [contas CadConta]
+            (ok (gerenciador/cadastrar (:descricao contas)
+                                       (:data_compra contas)
+                                       (:valor contas)
+                                       (:vencimento contas)
+                                       (:observacoes contas)))))))
 
-
+(defn -main []
+  (httpkit/run-server #'app {:port 17000})
+  (println "Server started on: localhost:17000"))

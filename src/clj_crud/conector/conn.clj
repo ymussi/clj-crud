@@ -6,3 +6,8 @@
                :user "root"
                :password ""})
 
+(def mysql-db-pessoal {:dbtype "mysql"
+                       :dbname "pessoal"
+                       :user "root"
+                       :password ""})
+
